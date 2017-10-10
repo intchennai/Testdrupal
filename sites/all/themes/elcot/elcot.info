@@ -1,0 +1,96 @@
+name = elcot
+description = A flexible, recolorable theme with many regions.
+package = Core
+version = VERSION
+core = 7.x
+
+stylesheets[all][] = css/style.css
+stylesheets[all][] = css/font-awesome.min.css
+stylesheets[all][] = css/fonts.css
+stylesheets[all][] = css/owl.theme.default.min_new.css
+stylesheets[all][] = css/owl.carousel_new.css
+stylesheets[all][] = css/owl.transitions.css
+stylesheets[all][] = css/smk-accordion.css
+stylesheets[all][] = css/solid-menu.css
+stylesheets[all][] = css/responsive.css
+stylesheets[all][] = css/jquery.mCustomScrollbar.css
+stylesheets[all][] = css/jquery.fs.boxer.css
+stylesheets[all][] = css/animation.css
+stylesheets[all][] = css/inner_tab.css
+stylesheets[all][] = css/solid-menu.css
+stylesheets[all][] = css/popup.min.css
+
+
+
+stylesheets[print][] = css/print.css
+
+
+
+
+
+
+scripts[] = js/jquery.minv-1.12.js
+scripts[] = js/owl.carousel.min_new.js
+scripts[] = js/commen.js
+scripts[] = js/styleswitch.js
+scripts[] = js/smk-accordion.js
+scripts[] = js/scrolljs.js.js
+scripts[] = js/jquery.fs.boxer.js
+scripts[] = js/jquery.hoverdir.js
+
+scripts[] = js/gallery/lightgallery.min.js
+scripts[] = js/gallery/jquery.mousewheel.min.js
+scripts[] = js/gallery/lg-autoplay.min.js
+scripts[] = js/gallery/lg-fullscreen.min.js
+scripts[] = js/gallery/lg-hash.min.js
+scripts[] = js/gallery/lg-pager.min.js
+scripts[] = js/gallery/lg-thumbnail.min.js
+scripts[] = js/gallery/lg-video.min.js
+scripts[] = js/gallery/lg-zoom.min.js
+scripts[] = js/modernizr.custom.97074.js
+
+
+
+
+
+regions[header] = Header
+regions[help] = Help
+regions[page_top] = Page top
+regions[page_bottom] = Page bottom
+regions[highlighted] = Highlighted
+
+regions[featured] = Featured
+regions[content] = Content
+regions[sidebar_first] = Sidebar first
+regions[sidebar_second] = Sidebar second
+
+regions[triptych_first] = Triptych first
+regions[triptych_middle] = Triptych middle
+regions[triptych_last] = Triptych last
+
+regions[footer_firstcolumn] = Footer first column
+regions[footer_secondcolumn] = Footer second column
+regions[footer_thirdcolumn] = Footer third column
+regions[footer_fourthcolumn] = Footer fourth column
+regions[banner] = Banner
+regions[footer] = Footer
+regions[events] = Events
+regions[whats_new] = Whats New
+regions[economic_zone] = Economic Zone
+regions[useful_links] = Useful Links
+regions[elcot_information] = Elcot Information
+regions[policy_note] = Policy Note
+regions[policies] = Policies
+
+
+regions[our_project] = Our Project
+
+
+settings[shortcut_module_link] = 0
+
+
+; Information added by Drupal.org packaging script on 2016-07-07
+version = "7.50"
+project = "drupal"
+datestamp = "1467918493"
+

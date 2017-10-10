@@ -1,0 +1,166 @@
+<?php 
+function get_main_menus() {
+//global $language;
+//$lang_name = $language->language;
+        $main_menu = db_select('menu_links','ml')
+            ->fields('ml',array('link_title','p1','options','has_children','link_path'))
+              ->condition('menu_name','main-menu')
+               ->condition('p2','0')
+              ->condition('hidden','0')
+              //->condition('language',$lang_name)
+			   ->orderBy('weight')
+               ->execute()
+			   ->fetchAll();
+ return $main_menu;
+}
+function get_sub_menus($submenu_p1) {
+   //global $language;
+//$lang_name = $language->language; 
+$sub_menu = db_select('menu_links','ml')
+            ->fields('ml',array('link_title','p2','options','has_children','link_path'))
+              ->condition('menu_name','main-menu')
+               ->condition('p1',$submenu_p1)
+               ->condition('p2','0','!=')
+			   ->condition('p3','0')
+               ->condition('hidden','0')
+             // ->condition('language',$lang_name)
+			  ->orderBy('weight')
+               ->execute()
+			   ->fetchAll();
+
+
+    return $sub_menu;
+
+  }
+ function get_sub_menus1($submenu_p2)
+{
+	
+    $submenuname1 = db_select('menu_links','ml');
+	$submenuname1->fields('ml',array('link_title','link_path','has_children','options'));
+	$submenuname1->condition('menu_name','main-menu');
+    $submenuname1->condition('p2',$submenu_p2);
+	$submenuname1->condition('p3','0','!=');
+	//$submenuname->orderBy('weight');
+	$submenuname1->condition('p4','0');
+	$results=$submenuname1->execute();
+	$submenuname_result1=$results->fetchAll();
+	return $submenuname_result1;
+	
+	
+} 
+  
+  
+  function common_form_alter(&$form, &$form_state, $form_id) {
+        global $base_url;
+		$i=0;
+	 if ($form_id == 'webform_client_form_454') {
+		 //$i=0;
+      
+	  $tenderid =  explode('?tenderid=',$form['#action']);
+	  $tender_id = $tenderid[1];
+      $node = node_load($tender_id);
+	  
+	  $node_title = $node->title;
+	  $form['#node']->title = "<h2 class='e_title'>" .$form['#node']->title. ' - ' ."<span>" .$node_title. "</span></h2>";
+	  $tender_uri= count($node->field_tender_document['und']);
+	  $tender_url = $node->field_tender_document['und'];
+	  //$tender_url= explode('//',$node->field_tender_document['und'][0]['uri']);
+	  //echo "<pre>";print_r($node);
+	  foreach($tender_url as $tender_url1)
+					    {
+							if(count($tender_url)>0)
+							{
+                           $img_src=EXPLODE('//',$tender_url1['uri']);
+						   $form['submitted']['tender']['#default_value'] = $img_src[1];
+							?>
+							
+							<!--<a href="<?php echo $base_url.'/sites/default/files/'.$img_src[1];?>" >Downloda multiple Pdfs</a> -->
+						
+							
+						 <?php 
+						   $i++;
+							}
+					      }
+	 
+	  $corrigendum_url= explode('//',$node->field_corrigendum_pdf['und'][0]['uri']);
+	  $form['submitted']['tender']['#default_value'] = $tender_url[1];
+	  $form['submitted']['corrigendum_file']['#default_value'] = $corrigendum_url[1];
+	 //$form['submitted']['tender']['#default_value'] = $node->field_tender_document['und'][0]['uri'];
+	 }
+	 if($form_id == "views_exposed_form"){
+	 //echo "<pre>";print_r($form);
+      $form['title']['#attributes'] = array('placeholder' => array(t('Enter Title')));
+      $form['field_end_date_value']['min']['#attributes'] = array('placeholder' => array(t('mm/dd/yy')));
+	  $form['field_end_date_value']['min']['#date_format'] = 'd-m-Y';
+      $form['field_end_date_value_1']['min']['#attributes'] = array('placeholder' => array(t('mm/dd/yy')));
+	  $form['field_end_date_value_1']['min']['#date_format'] = 'd-m-Y';
+      $form['field_end_date_value']['max']['#attributes'] = array('placeholder' => array(t('mm/dd/yy')));
+	  $form['field_end_date_value']['max']['#date_format'] = 'd-m-Y';
+      $form['field_end_date_value_1']['max']['#attributes'] = array('placeholder' => array(t('mm/dd/yy')));
+      $form['body_value']['#attributes'] = array('placeholder' => array(t('Enter Description')));
+      $form['title']['#attributes']['autocomplete'] = 'off';
+      $form['body_value']['#attributes']['autocomplete'] = 'off';
+      $form['field_end_date_value']['min']['#attributes']['autocomplete'] = 'off';
+      $form['field_end_date_value_1']['min']['#attributes'] ['autocomplete'] = 'off';
+      $form['field_end_date_value']['max']['#attributes']['autocomplete'] = 'off';
+      $form['field_end_date_value_1']['max']['#attributes']['autocomplete'] = 'off';
+      
+     
+
+     } 
+  
+
+}
+/*function common_cron(){
+      global $language;
+	   $lan = $language->language;
+	   $tender_data = db_select('node','n');
+	   $tender_data->leftjoin('field_data_field_end_date','fdfed','n.nid  = fdfed.entity_id');
+	   $tender_data->fields('n',array('nid'));
+	   $tender_data->fields('fdfed',array('field_end_date_value'));
+	   $tender_data->condition('n.language',$lan);
+	   $tender_data->condition('n.type','tender');
+	   $result = $tender_data->execute();
+	   $tender_details_result = $result->fetchAll();
+	   foreach($tender_details_result as $tender_details_result1)
+	   {
+		   $node = node_load($tender_details_result1->nid); 
+		   $end_date = EXPLODE(' ',$tender_details_result1->field_end_date_value);
+		   $end_date1 = $end_date[0];
+		   $expiration_date = strtotime($end_date1)."<br>";
+		   $todays_date = date("Y-m-d");
+		   $current_date = strtotime($todays_date);
+		   if($expiration_date < $current_date)
+		   {
+			 node_delete($tender_details_result1->nid);
+		        
+		   }
+		   
+		 }
+	  
+	  
+	  
+	  
+	   }
+*/
+/*function common_views_query_alter(&$view, &$query) {
+	
+  
+  if ($view->name =='tender' && $view->current_display == 'page' ) {
+	  
+   //echo "<pre>";print_r($view);
+    $query->orderby[0] =  array(
+        'field' => 'CASE WHEN field_data_field_ordering_date.field_ordering_date_value
+		
+		 THEN field_data_field_ordering_date.field_ordering_date_value ELSE node.created END',
+        'direction' => 'DESC',
+      );
+	
+	  
+	  
+  }
+}
+*/
+
+
+?>

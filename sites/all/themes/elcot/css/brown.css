@@ -1,0 +1,18 @@
+*{background-color: #58410a    !important;color: #fff !important;    border-color: #fff !important;}
+#nav {background:#58410a !important;}
+.prj_block{background:#58410a !important;}
+.head_top_icon {   background: #58410a !important;}
+#nav ul li a{ background:#58410a    !important;}
+#nav ul li a:hover{background:#fff !important}
+.banner_slider.owl-theme .owl-controls, .banner_slider.owl-theme .owl-controls div{background:none !important}
+.e_news_list > li{border: 1px solid #ccc !important;}
+.rt_ht_col a.wh_color{background:#fff !important;}
+.rt_ht_col a.bl_color{background:#030303 !important;}
+.rt_ht_col a.blue_color{background:#102648 !important;}
+.rt_ht_col a.br_color{background:#58410a !important;}
+.ser_prov ul li a i.ser_icon {   background: #003d38 !important;}
+.prj_block-color{background-color: #58410a    !important;}
+.owl-carousel.banner_slider.owl-custom-nav:hover .owl-controls .owl-buttons, .owl-theme .owl-controls .owl-page, .owl-carousel.banner_slider.owl-custom-nav:hover .owl-controls .owl-pagination{background:none !important;}
+.banner_slider.owl-theme .owl-controls .owl-page.active span, .banner_slider.owl-theme .owl-controls.clickable .owl-page:hover span{background:#fff !important}
+.our_project .owl-item:hover .our_pr_tit, .our_project .owl-item:hover .our_pr_tit a{background:#fff !important;color:#58410a !important;}
+.ser_prov ul li a i.ser_icon img{background:none !important}

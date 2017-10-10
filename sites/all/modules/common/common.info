@@ -1,0 +1,8 @@
+name = Common
+description = Contains the general functions in the site
+package = "Common"
+core = 7.x
+version = "7.12"
+project = "drupal"
+datestamp = "1343839327"
+
